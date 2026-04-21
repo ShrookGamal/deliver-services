@@ -314,3 +314,177 @@ body { background: var(--light); color: var(--dark); overflow-x: hidden; }
         margin-left: 0;
     }
 }
+/* --- Root Fixes --- */
+:root {
+    --primary: #FFCC00; 
+    --secondary: #E60000; 
+    --dark: #0f0f0f;
+    --light: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* يمنع الـ padding من زيادة عرض العنصر */
+    font-family: 'Cairo', sans-serif;
+}
+
+/* منع الاهتزاز والمسافة البيضاء */
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; /* يقتل الجزء الأبيض تماماً */
+    position: relative;
+    scroll-behavior: smooth;
+    background: var(--light);
+}
+
+/* --- Navbar Fixed --- */
+.navbar {
+    position: fixed;
+    top: 0; width: 100%;
+    padding: 15px 5%;
+    z-index: 1000;
+    transition: 0.4s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar.scrolled {
+    background: rgba(15, 15, 15, 0.98);
+    padding: 10px 5%;
+}
+.logo { font-size: 24px; font-weight: 900; color: #fff; }
+.logo span { color: var(--primary); }
+
+.nav-links { display: flex; list-style: none; }
+.nav-links li a { color: #fff; text-decoration: none; margin-left: 20px; font-weight: 700; font-size: 14px; }
+.nav-links a.active { color: var(--primary); }
+
+.menu-toggle { color: #fff; font-size: 25px; cursor: pointer; display: none; }
+
+/* --- Hero Section - Mobile Optimized --- */
+.hero {
+    width: 100%;
+    min-height: 100vh; /* يستخدم min-height بدل height لتفادي مشاكل المحتوى الطويل */
+    background: linear-gradient(rgba(203, 202, 202, 0.3), rgba(226, 225, 225, 0.5)), 
+                url('https://images.pexels.com/photos/4391470/pexels-photo-4391470.jpeg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px; /* مسافة أمان للجوانب */
+}
+
+.hero-content { width: 100%; max-width: 800px; }
+
+.top-badge {
+    background: var(--primary);
+    color: var(--dark);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 12px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 3rem; /* حجم كبير للكمبيوتر */
+    color: #fff;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+.hero h1 span { color: var(--primary); }
+.hero p { color: #ccc; font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6; }
+
+.hero-btns { display: flex; flex-direction: column; gap: 15px; align-items: center; }
+.btn-hero {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+.btn-hero i { margin-left: 10px; }
+.call-h { background: var(--secondary); color: #fff; }
+.wa-h { background: #25d366; color: #fff; }
+
+/* --- Sections Common --- */
+section { padding: 80px 20px; width: 100%; }
+.main-title { font-size: 2.2rem; text-align: center; margin-bottom: 40px; color: var(--secondary); font-weight: 900; }
+
+/* --- Areas Section Fixed --- */
+.areas { background: #0a0a0a; color: #fff; }
+.areas-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.area-card {
+    background: #1a1a1a;
+    padding: 25px;
+    border-radius: 15px;
+    border-right: 5px solid var(--primary);
+}
+
+/* --- Floating Bar Fixed --- */
+.floating-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%); /* يوسط الأزرار تماماً في الموبايل */
+    display: flex;
+    gap: 10px;
+    z-index: 2000;
+    width: 90%;
+    max-width: 400px;
+}
+.float-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 50px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.f-call { background: var(--secondary); }
+.f-wa { background: #25d366; }
+
+/* --- MEDIA QUERIES (The Fixes) --- */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.2rem; } /* تصغير الخط للموبايل */
+    .hero p { font-size: 1rem; }
+    
+    .menu-toggle { display: block; }
+    
+    .nav-links {
+        position: fixed; top: 0; right: -100%;
+        width: 75%; height: 100vh;
+        background: #111;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s;
+    }
+    .nav-links.active { right: 0; }
+    .nav-links li { margin: 15px 0; }
+    .nav-links li a { font-size: 18px; }
+}
+
+@media (min-width: 769px) {
+    .hero-btns { flex-direction: row; justify-content: center; }
+    .floating-bar { left: 30px; transform: none; width: auto; flex-direction: column; }
+}
